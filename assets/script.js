@@ -1,8 +1,10 @@
 const startButtonEl = document.getElementById("start-btn");
-const timerEl = document.getElementById("countdown");
-const questionSpace = document.getElementById("question-space");
+
+const questionSpace = document.getElementById("question-container");
+const questionText = document.getElementById("question-text")
 const answerSet = document.getElementById("answer-buttons");
 
+const timerEl = document.getElementById("countdown");
 const questions = [
     {
         question: "Which built-in method calls a function for each element in the array?",
@@ -25,17 +27,29 @@ const questions = [
     },
 ]
 
+var showQuestion = function () {
+        questionText.innerText = questions[0].question;
+        answerSet.innerHTML = questions[0].answers.forEach(answers => {
+           const button = document.createElement("button");
+            button.appendChild;
+            button.innerText = answers.text});
+        };
+
 
 var startGame = function () {
-    if (1===1) {console.log("hi!")};
+    console.log ("hi");
+    startButtonEl.classList.add("hide");
+    questionSpace.classList.remove("hide");
+showQuestion ();
 
-    function showQuestion(questions) {
-        questionSpace.textContent = questions.question;
-        console.log(questions);
-        
-        let button = document.createElement("button");   
-};
-};
+}
+
+
+
+var checkAnswers = function () {
+    
+}
+
 
 /*GIVEN I am taking a code quiz
 WHEN I click the Start button*/
