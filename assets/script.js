@@ -43,10 +43,21 @@ const questions = [
     },
 ]
 
-var showQuestion = function () { };
-// console.log(questions[0]["answers"][0]);};
+var questionCounter = 0
 
-//var questionCounter = questionindex Number
+    
+    var showQuestion = function () {
+        // for loop for lengthe of Question array 
+        for(let i = 0 ; i < questions[questionCounter].answers.length; i++) {
+            questionText.innerText = questions[questionCounter].question;
+            var answerButton = document.createElement("button");
+            answerButton.className = "answer-choice btn";
+             answerButton.innerText = questions[questionCounter].answers[i].text;
+             answerSet.appendChild(answerButton);};
+       
+    };
+
+
 //build function to increase index number
 
 // questionText.innerText = questions[0].question;
@@ -70,7 +81,9 @@ var startGame = function () {
 
 
 var checkAnswers = function () {
+    questionCounter++;
 
+    //show new question
 }
 
 var showHighScores = function () {
