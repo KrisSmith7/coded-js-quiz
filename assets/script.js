@@ -5,19 +5,35 @@ const questionText = document.getElementById("question-text")
 const answerSet = document.getElementById("answer-buttons");
 
 const timerEl = document.getElementById("countdown");
-const questions = [
-    {
-        question: "Which built-in method calls a function for each element in the array?",
-        answers: [
-            { text: "A - forEach()", correct: true},
-            { text: "B - while()", correct: false},
-            { text: "C - loop()", correct: false},
-            { text: "D - array()", correct: false},
-        ]
-    },
+
+var counter = 60;
+const countdown = function(){
+    console.log (counter);
+    counter--;
+    timerEl.innerText = "Time Left: " + counter;
+    if (counter === 0) {
+        timerEl.innerText = "Game Over!";
+        console.log("game over!");
+        clearInterval(startCountdown);
+        };
+    };
     
-    {
-        question: "Which built-in method returns the calling string value converted to upper case?",
+    var startCountdown = setInterval(countdown, 1000);
+    
+    
+    const questions = [
+        {
+            question: "Which built-in method calls a function for each element in the array?",
+            answers: [
+                { text: "A - forEach()", correct: true},
+                { text: "B - while()", correct: false},
+                { text: "C - loop()", correct: false},
+                { text: "D - array()", correct: false},
+            ]
+        },
+        
+        {
+            question: "Which built-in method returns the calling string value converted to upper case?",
         answers: [
             { text: "A - changeCase(case)", correct:false},
             { text: "B - toUpper()", correct: false},
@@ -28,19 +44,19 @@ const questions = [
 ]
 
 var showQuestion = function () {
-        questionText.innerText = questions[0].question;
-        answerSet.innerHTML = questions[0].answers.forEach(answers => {
-           const button = document.createElement("button");
-            button.appendChild;
-            button.innerText = answers.text});
-        };
-
-
-var startGame = function () {
-    console.log ("hi");
-    startButtonEl.classList.add("hide");
-    questionSpace.classList.remove("hide");
-showQuestion ();
+    questionText.innerText = questions[0].question;
+    answerSet.innerHTML = questions[0].answers.forEach(answers => {
+        const button = document.createElement("button");
+        button.appendChild;
+        button.innerText = answers.text});
+    };
+    
+    
+    var startGame = function () {
+        console.log ("hi");
+        startButtonEl.classList.add("hide");
+        questionSpace.classList.remove("hide");
+        showQuestion ();
 
 }
 
