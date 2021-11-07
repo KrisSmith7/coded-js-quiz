@@ -3,24 +3,27 @@ const startButtonEl = document.getElementById("start-btn");
 const questionSpace = document.getElementById("question-container");
 const questionText = document.getElementById("question-text")
 const answerSet = document.getElementById("answer-buttons");
+const instructions = document.getElementById("quiz-instr");
+const scoreField = document.getElementById("score-field");
 
 const timerEl = document.getElementById("countdown");
 
 
-/*WHEN the game is over
-THEN I can save my initials and score*/
+//WHEN the game is over, THEN I can save my initials and score
 var highscore = []
 
 var showHighScores = function () {
     var highScoreList = document.getElementById("score-field");
     var playerInfo = document.createElement("li");
            playerInfo.className = "player-score";
-            playerInfo.innerText = prompt("Enter your name:");
+            playerInfoName = document.querySelector("input[name='player-name']");
             highScoreList.appendChild(playerInfo);
+            scoreField.classList.remove("hide");
+            
             function setScores () {localStorage.setItem (playerInfo, highscore)};
-            function getScores () {JSON.parse(window.localStorage.getItem(playerInfo, highscores)) || []};
         }
-
+        
+        function getScores () {JSON.parse(window.localStorage.getItem(playerInfo, highscores)) || []};
 
 var counter = 60;
 
@@ -72,14 +75,14 @@ var questionCounter = 0
             var answerButton = document.createElement("button");
             answerButton.className = "answer-choice btn";
              answerButton.innerText = questions[questionCounter].answers[i].text;
-             answerButton.value = questions[questionCounter].answers[i].correct;
+             answerButton.name = questions[questionCounter].answers[i].correct;
              answerSet.appendChild(answerButton);
-             console.dir(answerButton)
-             function checkAnswers () {
-                 if (answerButton.title == true) {questionText.innerText = "YES!"; }
-                //  WHEN I answer a question incorrectly
-                //  THEN time is subtracted from the clock
-                 else if (answerButton.title == false) {questionText.innerText = "Incorrect! " + "Next question...";
+            //  console.dir(answerButton);
+             function checkAnswers (event) {
+                playerChoice = event.target.name;
+                 if (playerChoice === "true") {questionText.innerText = "YES!"; }
+                //  WHEN I answer a question incorrectly, THEN time is subtracted from the clock
+                 else if (playerChoice === "false") {questionText.innerText = "Incorrect! " + "Next question...";
                 counter = counter - 10;}
              };
              answerButton.addEventListener('click', checkAnswers)
@@ -87,7 +90,8 @@ var questionCounter = 0
         };
 
     function nextQuestion () {
-    questionCounter++;
+        for(let i = 0 ; i < questions[questionCounter].answers.length; i++) {
+    questionCounter++};
     questionText.innerText = questions[questionCounter].question;
             var answerButton = document.createElement("button");
             answerButton.className = "answer-choice btn";
@@ -100,9 +104,10 @@ var questionCounter = 0
             
             
             var startGame = function () {
-                console.log("hi");
                 startButtonEl.classList.add("hide");
                 questionSpace.classList.remove("hide");
+                timerEl.classList.remove("hide");
+                instructions.classList.add("hide");
                 showTimer();
                 showQuestion();
                 
@@ -111,8 +116,7 @@ var questionCounter = 0
             
 
 
-/*GIVEN I am taking a code quiz
-WHEN I click the Start button*/
+//GIVEN I am taking a code quiz, WHEN I click the Start button
 startButtonEl.addEventListener("click", startGame);
 
 

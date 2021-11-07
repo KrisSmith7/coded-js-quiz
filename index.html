@@ -10,7 +10,7 @@
 <body>
     <div class="quiz-title">
         <h1 class=title>Coding Quiz Challenge</h1>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem veniam dolorum consequatur possimus in nobis adipisci labore, sed dolor culpa ipsa, quis minus saepe reprehenderit et error laboriosam ipsam ullam?</p>
+        <p id="quiz-instr">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem veniam dolorum consequatur possimus in nobis adipisci labore, sed dolor culpa ipsa, quis minus saepe reprehenderit et error laboriosam ipsam ullam?</p>
         <button id="start-btn" class="btn">Start Quiz</button>
     </div>
     
@@ -21,13 +21,20 @@
         
         <div id="answer-buttons"><!---insert answer choices here--></div>
 
-        <div id="countdown">Time Left:</div>
+        <div id="countdown" class = "hide">Time Left:</div>
     </div>
     
-    <script src = "./assets/script.js"></script>
-
-    <fieldset id="score-field">
+    
+    
+    <fieldset id="score-field" class="hide">
+        <div class="form">
+            <form>
+            <input type="text" name="player-name" placeholder="Enter Your Name" />
+            </form>
+        </div>
         <ul></ul>
     </fieldset>
+    
+    <script src = "./assets/script.js"></script>
 </body>
 </html>
