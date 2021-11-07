@@ -6,13 +6,16 @@ const answerSet = document.getElementById("answer-buttons");
 
 const timerEl = document.getElementById("countdown");
 
+
+/*WHEN the game is over
+THEN I can save my initials and score*/
 var highscore = []
 
 var showHighScores = function () {
     var highScoreList = document.getElementById("score-field");
     var playerInfo = document.createElement("li");
            playerInfo.className = "player-score";
-             playerInfo.innerText = prompt("Enter your name:");
+            playerInfo.innerText = prompt("Enter your name:");
             highScoreList.appendChild(playerInfo);
             function setScores () {localStorage.setItem (playerInfo, highscore)};
             function getScores () {JSON.parse(window.localStorage.getItem(playerInfo, highscores)) || []};
@@ -26,8 +29,7 @@ const showTimer = function () {
     // THEN the game is over
     function endgame() {
         clearInterval(timer);
-        getScores();
-        setScores ();
+        showHighScores ();
     }
     function countdown() {
         counter--;
@@ -113,8 +115,7 @@ var questionCounter = 0
 WHEN I click the Start button*/
 startButtonEl.addEventListener("click", startGame);
 
-/*WHEN the game is over
-THEN I can save my initials and score*/
+
 
 
 /*
