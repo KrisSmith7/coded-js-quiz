@@ -20,7 +20,7 @@ var showHighScores = function () {
     highScoreList.appendChild(playerInfo);
     scoreField.classList.remove("hide");
 
-    function setScores() { localStorage.setItem(playerInfo, highscore) };
+    function setScores() {JSON.stringify(window.localStorage.setItem(playerInfo, highscore)) };
 }
 
 function getScores() { JSON.parse(window.localStorage.getItem(playerInfo, highscores)) || [] };
