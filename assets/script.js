@@ -25,7 +25,7 @@ const questions = [
     {
         question: "Which built-in method calls a function for each element in the array?",
         answers: [
-            { text: "A - forEach()", correct: true },
+            { text: "A - forEach()", correct: "true"},
             { text: "B - while()", correct: false },
             { text: "C - loop()", correct: false },
             { text: "D - array()", correct: false },
@@ -56,6 +56,11 @@ var questionCounter = 0
              answerButton.value = questions[questionCounter].answers[i].correct;
              answerSet.appendChild(answerButton);
              console.dir(answerButton)
+             function checkAnswers () {
+                 if (answerButton.title == true) {questionText.innerText = "YES!"}
+                 else if (answerButton.title == false) {questionText.innerText = "Incorrect! " + "Next question..." }
+             }
+             answerButton.addEventListener('click', checkAnswers)
             }
         };
        
