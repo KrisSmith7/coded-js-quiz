@@ -1,5 +1,3 @@
-console.log(this);
-
 const startButtonEl = document.getElementById("start-btn");
 
 const questionSpace = document.getElementById("question-container");
@@ -12,34 +10,50 @@ const timerEl = document.getElementById("countdown");
 
 
 //WHEN the game is over, THEN I can save my initials and score
-var highscore = []
+var highscore = [];
+var playerScore = 0;
+
+function saveHighScore () {
+    var pInfo = {
+        pName: prompt("What's your name?"),
+        pScore: playerScore,
+    }
+console.log(pInfo);
+highscore.push(pInfo);
+console.log(highscore);
+// function setScores() { JSON.stringify(window.localStorage.setItem(playerInfoName)) };
+window.localStorage.setItem("HighScores", JSON.stringify(highscore));
+ showHighScores ();
+};
+
+var getScores = JSON.parse(window.localStorage.getItem("HighScores")) || [];
 
 var showHighScores = function () {
     scoreField.classList.remove("hide");
-    var playerInfoName = document.querySelectorAll("input[name='player-name']");
+
+    for(i=0; i < getScores.length;i++) {
     var playerListEl = document.createElement("li");
-    playerListEl.className = "player-score";
-    var playerDisplay = document.createElement("div")
-    playerDisplay.className = "player-container"
-    playerDisplay.innerHTML = "<h3 class = 'player-name'>" + playerInfoName + "</h3>" //+ playerscore
-    //player % score
-    playerListEl.appendChild(playerDisplay);
-    playerDisplay.appendChild(scoreField);
-    function setScores() { JSON.stringify(window.localStorage.setItem(playerInfoName)) };
-    
-    function getScores() { JSON.parse(window.localStorage.getItem(playerInfoName)) || [] };
+    playerListEl.textContent = highscore[i].pName + " -- " + highscore[i].pScore;
+    scoreField.appendChild(playerListEl);};
+
+    // var playerDisplay = document.createElement("div")
+    // playerListEl.className = "player-score";
+    // playerDisplay.className = "player-container"
+    // playerDisplay.innerHTML = "<h3 class = 'player-name'>" + pName + "</h3>" + playerscore
+    // playerDisplay.appendChild(playerListEl);
+    // scoreField.appendChild(playerDisplay);
 };
 
 
 var endgame = function () {
-    if (counter === 0 || questions.lastIndexOf) {
+    if (counter === 0) {
         questionSpace.classList.add("hide");
         answerSet.classList.add("hide");
-        showHighScores();
+       saveHighScore ();
     };
 }
 
-var counter = 90;
+var counter = 10;
 
 const showTimer = function () {
     // WHEN all questions are answered or the timer reaches 0, THEN the game is over
@@ -196,6 +210,7 @@ var startGame = function () {
     instructions.classList.add("hide");
     showTimer();
     showQuestion();
+    saveHighScore();
 }
 
 

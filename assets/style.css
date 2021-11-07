@@ -81,6 +81,13 @@ body {
     display: none;
 }
 
+.correct {
+    background-color: green;
+}
+
+.incorrect {
+    background-color: red;
+}
 /*
 
 #score-field
