@@ -47,15 +47,19 @@ var questionCounter = 0
 
     
     var showQuestion = function () {
-        // for loop for lengthe of Question array 
+        // for loop for length of Question array 
         for(let i = 0 ; i < questions[questionCounter].answers.length; i++) {
             questionText.innerText = questions[questionCounter].question;
             var answerButton = document.createElement("button");
             answerButton.className = "answer-choice btn";
              answerButton.innerText = questions[questionCounter].answers[i].text;
-             answerSet.appendChild(answerButton);};
+             answerButton.value = questions[questionCounter].answers[i].correct;
+             answerSet.appendChild(answerButton);
+             console.dir(answerButton)
+            }
+        };
        
-    };
+
 
 
 //build function to increase index number
@@ -93,11 +97,7 @@ var showHighScores = function () {
 /*GIVEN I am taking a code quiz
 WHEN I click the Start button*/
 startButtonEl.addEventListener("click", startGame);
-
-/*THEN a timer starts and I am presented with a question
-//interval-timer
-//text element. question and answer dataset
-
+/*
 WHEN I answer a question
 THEN I am presented with another question
 
