@@ -39,7 +39,7 @@ var endgame = function () {
     };
 }
 
-var counter = 25;
+var counter = 90;
 
 const showTimer = function () {
     // WHEN all questions are answered or the timer reaches 0, THEN the game is over
@@ -67,7 +67,6 @@ const questions = [
             { text: "D - array()", correct: "false" },
         ]
     },
-
     {
         question: "Which built-in method returns the calling string value converted to upper case?",
         answers: [
@@ -102,6 +101,52 @@ const questions = [
             { text: "B - Math.min(x,y)", correct: "true" },
             { text: "C - Math.min(xy)", correct: "false" },
             { text: "D - min(xy)", correct: "false" },
+        ]
+    },
+    {
+        question: "What is the correct syntax for referring to an external script called 'abc.js'?",
+        answers: [
+            {text: "A - <script src='abc.js'>", correct: "true" },
+            { text: "B- <script href='abc.js'>", correct: "false" },
+            { text: "C - <script name='abc.js'>", correct: "false" },
+            { text: "D - None of the above", correct: "false" },
+        ]
+    },
+    {
+        question: "Which of the following event fires when the form element loses the focus: <button>, <input>, <label>, <select>, <textarea>?",
+        answers: [
+            { text: "A - ondblclick", correct: "false" },
+            { text: "B - onfocus", correct: "false" },
+            { text: "C - onclick", correct: "false" },
+            {text: "D - onblur", correct: "true" },
+        ]
+    },
+    {
+        question: "Using _______ statement is how you test for a specific condition.",
+        answers: [
+            { text: "A - Select", correct: "false" },
+            { text: "B - Switch", correct: "false" },
+            {text: "C - If", correct: "true" },
+            { text: "D - For", correct: "false" },
+        ]
+    },
+    {
+        question: "Which of the following function of String object combines the text of two strings and returns a new string?",
+        answers: [
+            {text: "A - concat()", correct: "true" },
+            { text: "B - merge()", correct: "false" },
+            { text: "C - append()", correct: "false" },
+            { text: "D - add()", correct: "false" },
+        ]
+    },
+    {
+       
+        question: "How can you add a comment in a JavaScript?",
+        answers: [
+            {text: "A - 'This is a comment'", correct: "false" },
+            { text: "B - //This is a comment", correct: "true" },
+            { text: "C - <!--This is a comment-->", correct: "false" },
+            { text: "D - *This is a comment*", correct: "false" },
         ]
     },
 ]
