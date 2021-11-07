@@ -6,7 +6,7 @@ const answerSet = document.getElementById("answer-buttons");
 
 const timerEl = document.getElementById("countdown");
 
-var counter = 10;
+var counter = 60;
 
 const showTimer = function () {
     function endgame() {
@@ -58,7 +58,10 @@ var questionCounter = 0
              console.dir(answerButton)
              function checkAnswers () {
                  if (answerButton.title == true) {questionText.innerText = "YES!"}
-                 else if (answerButton.title == false) {questionText.innerText = "Incorrect! " + "Next question..." }
+                //  WHEN I answer a question incorrectly
+                //  THEN time is subtracted from the clock
+                 else if (answerButton.title == false) {questionText.innerText = "Incorrect! " + "Next question...";
+                counter = counter - 10;}
              }
              answerButton.addEventListener('click', checkAnswers)
             }
@@ -87,14 +90,6 @@ var startGame = function () {
 }
 
 
-
-
-var checkAnswers = function () {
-    questionCounter++;
-
-    //show new question
-}
-
 var showHighScores = function () {
     var highScoreList = document.getElementById("")
 }
@@ -106,8 +101,6 @@ startButtonEl.addEventListener("click", startGame);
 WHEN I answer a question
 THEN I am presented with another question
 
-WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
 if answer:'correct' (eventListener)clicked = false, timerEl (countdown) decrements by 15 secs.
 
 
