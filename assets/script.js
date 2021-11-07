@@ -1,3 +1,5 @@
+console.log(this);
+
 const startButtonEl = document.getElementById("start-btn");
 
 const questionSpace = document.getElementById("question-container");
@@ -13,31 +15,43 @@ const timerEl = document.getElementById("countdown");
 var highscore = []
 
 var showHighScores = function () {
-    var highScoreList = document.getElementById("score-field");
-    var playerInfo = document.createElement("li");
-    playerInfo.className = "player-score";
-    playerInfoName = document.querySelector("input[name='player-name']");
-    highScoreList.appendChild(playerInfo);
     scoreField.classList.remove("hide");
+    var playerInfoName = document.querySelectorAll("input[name='player-name']");
+    var playerListEl = document.createElement("li");
+    playerListEl.className = "player-score";
+    var playerDisplay = document.createElement("div")
+    playerDisplay.className = "player-container"
+    playerDisplay.innerHTML = "<h3 class = 'player-name'>" + playerInfoName + "</h3>" //+ playerscore
+    //player % score
+    playerListEl.appendChild(playerDisplay);
+    playerDisplay.appendChild(scoreField);
+    function setScores() { JSON.stringify(window.localStorage.setItem(playerInfoName)) };
+    
+    function getScores() { JSON.parse(window.localStorage.getItem(playerInfoName)) || [] };
+};
 
-    function setScores() {JSON.stringify(window.localStorage.setItem(playerInfo, highscore)) };
+
+var endgame = function () {
+    if (counter === 0 || questions.lastIndexOf) {
+        questionSpace.classList.add("hide");
+        answerSet.classList.add("hide");
+        showHighScores();
+    };
 }
 
-function getScores() { JSON.parse(window.localStorage.getItem(playerInfo, highscores)) || [] };
-
-var counter = 60;
+var counter = 25;
 
 const showTimer = function () {
-    // WHEN all questions are answered or the timer reaches 0
-    // THEN the game is over
-    function endgame() {
+    // WHEN all questions are answered or the timer reaches 0, THEN the game is over
+    function clearTimer() {
         clearInterval(timer);
-        showHighScores();
+        endgame();
+        //return % score;
     }
     function countdown() {
         counter--;
         timerEl.innerText = "Time Left: " + counter;
-        if (counter <= 0 ) { timerEl.innerHTML = "<h3>'Game Over'</h3>"; endgame(); }
+        if (counter <= 0) { timerEl.innerHTML = "<h3>'Game Over'</h3>"; clearTimer(); }
     }
     var timer = setInterval(countdown, 1000);
 };
@@ -105,32 +119,30 @@ var showQuestion = function () {
         answerButton.name = questions[questionCounter].answers[i].correct;
         answerSet.appendChild(answerButton);
 
-        //  checks if selected answer is correct
+        //checks if selected answer is correct
         function checkAnswers(event) {
             playerChoice = event.target.name;
-            if (playerChoice === "true") {questionText.innerText = "YES!"; nextQuestion()}
+            if (playerChoice === "true") { questionText.innerText = "YES!"; nextQuestion() }
             //  WHEN I answer a question incorrectly, THEN time is subtracted from the clock
             else if (playerChoice === "false") {
                 questionText.innerText = "Incorrect!";
                 counter = counter - 10;
                 nextQuestion()
-                   }
+            }
         };
         answerButton.addEventListener('click', checkAnswers)
     };
 };
 
+// WHEN I answer a question, THEN I am presented with another question
 var nextQuestion = function () {
-        questionCounter++;
-        questionText.innerText = questions[questionCounter].question;
-        answerSet.innerText = ""
-        showQuestion();
-        if (questionCounter > questions.answers.length) {endgame();};
-    };
+    questionCounter++;
+    // questionText.innerText = questions[questionCounter].question;
+    answerSet.innerText = ""
+    showQuestion();
+};
 
-
-
-
+// if (questionCounter > questions.answers.length) {endgame();};
 
 var startGame = function () {
     startButtonEl.classList.add("hide");
@@ -145,10 +157,3 @@ var startGame = function () {
 
 //GIVEN I am taking a code quiz, WHEN I click the Start button
 startButtonEl.addEventListener("click", startGame);
-
-
-
-
-/*
-WHEN I answer a question
-THEN I am presented with another question*/
