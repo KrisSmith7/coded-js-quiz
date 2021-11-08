@@ -5,6 +5,8 @@ This is a project incorporating javascript in order to create a timed quiz. Play
 Acceptance Criteria is below.
 
 ---
+
+
 ## Acceptance Criteria
 
 ```
@@ -21,11 +23,15 @@ WHEN the game is over
 THEN I can save my initials and score
 ```
 
+---
+### Deployed Application
+
 The following is a screenshot of the application as well as a link to the deployed application:
+
+https://krissmith7.github.io/coded-js-quiz/
 
 ![Screenshot of the Coding Quiz Challenge.](./assets/screenshot.png)
 
-### Deployed Application
 
 
 ---

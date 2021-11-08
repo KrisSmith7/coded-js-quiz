@@ -211,7 +211,6 @@ var showQuestion = function () {
 // WHEN I answer a question, THEN I am presented with another question
 var nextQuestion = function () {
     questionCounter++;
-    // questionText.innerText = questions[questionCounter].question;
     answerSet.innerText = ""
     showQuestion();
 };
