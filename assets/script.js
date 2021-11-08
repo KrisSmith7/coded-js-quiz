@@ -1,4 +1,3 @@
-console.log(this);
 const startButtonEl = document.getElementById("start-btn");
 
 const questionSpace = document.getElementById("question-container");
@@ -15,7 +14,7 @@ var highscore = [];
 var playerScore = 0;
 var getScores = JSON.parse(window.localStorage.getItem("HighScores")) || [];
 
-function saveHighScore (event) {
+function saveHighScore(event) {
     event.preventDefault;
 
     var pInfo = {
@@ -29,61 +28,63 @@ function saveHighScore (event) {
 
     console.log(pInfo);
     highscore.push(pInfo);
-    
+
     window.localStorage.setItem("HighScores", JSON.stringify(highscore));
-    
-    showHighScores ();
+
+    showHighScores();
 };
 
-function showHighScores () {
+function showHighScores() {
     scoreField.classList.remove("hide");
     var list = document.getElementById("score-list");
     scoreField.innerHTML = "<h2 class='score-title'>High Scores</h2>"
     var playerDisplay = document.createElement("div");
     playerDisplay.className = "player-container";
-        
-    for(i=0; i < getScores.length;i++) {
+
+    for (i = 0; i < getScores.length; i++) {
         const playerListEl = document.createElement("li");
         playerListEl.className = "player-score";
         playerListEl.textContent = highscore[i].pName + " -- " + highscore[i].pScore;
         playerDisplay.appendChild(playerListEl);
         scoreField.appendChild(playerDisplay)
-        }
-    };
-    
-    var saveButton = document.getElementById('saveButton');
-    saveButton.addEventListener('click', saveHighScore);
-
-    
-    var endgame = function () {
-        if (counter === 0) {
-            questionSpace.classList.add("hide");
-            answerSet.classList.add("hide");
-    
-        };
+        return getScores;
     }
-    
-    var counter = 60;
-    
-    console.log(getScores);
-    const showTimer = function () {
-        // WHEN all questions are answered or the timer reaches 0, THEN the game is over
-        function clearTimer() {
-            clearInterval(timer);
-            endgame();
-            showHighScores ();
-        }
-        function countdown() {
-            counter--;
-            timerEl.innerText = "Time Left: " + counter;
-            if (counter <= 0 || questionCounter > 9) { 
-                questionSpace.innerText ="";
-                answerSet.innerText = "";
-                timerEl.innerHTML = "<h3 class = 'end-message'>Game Over!</h3> <p>Click 'Save Score' button below to save your score or refresh your page to try again!</p>"; clearTimer(); }
-        }
-        var timer = setInterval(countdown, 1000);
+};
+console.log(getScores);
+
+var saveButton = document.getElementById('saveButton');
+saveButton.addEventListener('click', saveHighScore);
+
+
+var endgame = function () {
+    if (counter === 0) {
+        questionSpace.classList.add("hide");
+        answerSet.classList.add("hide");
+
     };
-    
+}
+
+var counter = 60;
+
+const showTimer = function () {
+    // WHEN all questions are answered or the timer reaches 0, THEN the game is over
+    function clearTimer() {
+        clearInterval(timer);
+        endgame();
+        showHighScores();
+    }
+    function countdown() {
+        counter--;
+        timerEl.innerText = "Time Left: " + counter;
+        if (counter <= 0 || questionCounter > 9) {
+            questionSpace.innerText = "";
+            answerSet.innerText = "";
+            timerEl.innerHTML = "<h3 class = 'end-message'>Game Over!</h3> <p>Click 'Save Score' button below to save your score or refresh your page to try again!</p>"; clearTimer();
+        }
+    }
+    var timer = setInterval(countdown, 1000);
+};
+
 
 const questions = [
     {
@@ -134,7 +135,7 @@ const questions = [
     {
         question: "What is the correct syntax for referring to an external script called 'abc.js'?",
         answers: [
-            {text: "A - <script src='abc.js'>", correct: "true" },
+            { text: "A - <script src='abc.js'>", correct: "true" },
             { text: "B- <script href='abc.js'>", correct: "false" },
             { text: "C - <script name='abc.js'>", correct: "false" },
             { text: "D - None of the above", correct: "false" },
@@ -146,7 +147,7 @@ const questions = [
             { text: "A - ondblclick", correct: "false" },
             { text: "B - onfocus", correct: "false" },
             { text: "C - onclick", correct: "false" },
-            {text: "D - onblur", correct: "true" },
+            { text: "D - onblur", correct: "true" },
         ]
     },
     {
@@ -154,24 +155,24 @@ const questions = [
         answers: [
             { text: "A - Select", correct: "false" },
             { text: "B - Switch", correct: "false" },
-            {text: "C - If", correct: "true" },
+            { text: "C - If", correct: "true" },
             { text: "D - For", correct: "false" },
         ]
     },
     {
         question: "Which of the following function of String object combines the text of two strings and returns a new string?",
         answers: [
-            {text: "A - concat()", correct: "true" },
+            { text: "A - concat()", correct: "true" },
             { text: "B - merge()", correct: "false" },
             { text: "C - append()", correct: "false" },
             { text: "D - add()", correct: "false" },
         ]
     },
     {
-       
+
         question: "How can you add a comment in a JavaScript?",
         answers: [
-            {text: "A - 'This is a comment'", correct: "false" },
+            { text: "A - 'This is a comment'", correct: "false" },
             { text: "B - //This is a comment", correct: "true" },
             { text: "C - <!--This is a comment-->", correct: "false" },
             { text: "D - *This is a comment*", correct: "false" },
@@ -195,10 +196,12 @@ var showQuestion = function () {
         //checks if selected answer is correct
         function checkAnswers(event) {
             playerChoice = event.target.name;
-            if (playerChoice === "true") {playerScore = playerScore + 10; nextQuestion() 
-            // console.log(playerScore);
-            //  WHEN I answer a question incorrectly, THEN time is subtracted from the clock
-            } else if (playerChoice === "false") {;
+            if (playerChoice === "true") {
+                playerScore = playerScore + 10; nextQuestion()
+                // console.log(playerScore);
+                //  WHEN I answer a question incorrectly, THEN time is subtracted from the clock
+            } else if (playerChoice === "false") {
+                ;
                 counter = counter - 10;
                 nextQuestion()
             }
@@ -222,6 +225,7 @@ var startGame = function () {
     instructions.classList.add("hide");
     showTimer();
     showQuestion();
+    getScores();
 }
 
 
