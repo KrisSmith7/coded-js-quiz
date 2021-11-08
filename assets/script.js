@@ -18,6 +18,11 @@ function saveHighScore () {
         pName: prompt("What's your name?"),
         pScore: playerScore,
     }
+    while (pInfo.pName === "" || pInfo.pName === null) {
+        window.alert("Please provide a valid response! Please try again.");
+        return saveHighScore();
+};
+
 console.log(pInfo);
 highscore.push(pInfo);
 console.log(highscore);
@@ -30,18 +35,22 @@ var getScores = JSON.parse(window.localStorage.getItem("HighScores")) || [];
 
 var showHighScores = function () {
     scoreField.classList.remove("hide");
-
+    var playerDisplay = document.createElement("div");
+    playerDisplay.className = "player-container";
+    var scoreHeader = document.createElement("h2")
+    scoreHeader.className = "score-title"
+    scoreHeader.textContent = "High Scores"
+    scoreField.appendChild (scoreHeader);
+    
     for(i=0; i < getScores.length;i++) {
     var playerListEl = document.createElement("li");
+    playerListEl.className = "player-score";
+    // playerListEl.innerHTML = "<h3 class = 'player-name'>" + pInfo.pName + "</h3>" + "<span class = 'p-score'>"  + playerScore + "</span>"
     playerListEl.textContent = highscore[i].pName + " -- " + highscore[i].pScore;
-    scoreField.appendChild(playerListEl);};
+    // scoreField.appendChild(playerListEl);};
 
-    // var playerDisplay = document.createElement("div")
-    // playerListEl.className = "player-score";
-    // playerDisplay.className = "player-container"
-    // playerDisplay.innerHTML = "<h3 class = 'player-name'>" + pName + "</h3>" + playerscore
-    // playerDisplay.appendChild(playerListEl);
-    // scoreField.appendChild(playerDisplay);
+    playerDisplay.appendChild(playerListEl);
+    scoreField.appendChild(playerDisplay);}
 };
 
 
@@ -60,7 +69,7 @@ const showTimer = function () {
     function clearTimer() {
         clearInterval(timer);
         endgame();
-        //return % score;
+        saveHighScore();
     }
     function countdown() {
         counter--;
@@ -181,9 +190,10 @@ var showQuestion = function () {
         //checks if selected answer is correct
         function checkAnswers(event) {
             playerChoice = event.target.name;
-            if (playerChoice === "true") { questionText.innerText = "YES!"; nextQuestion() }
+            if (playerChoice === "true") {playerScore = playerScore + 10; nextQuestion() 
+            // console.log(playerScore);
             //  WHEN I answer a question incorrectly, THEN time is subtracted from the clock
-            else if (playerChoice === "false") {
+            } else if (playerChoice === "false") {
                 questionText.innerText = "Incorrect!";
                 counter = counter - 10;
                 nextQuestion()
@@ -210,7 +220,6 @@ var startGame = function () {
     instructions.classList.add("hide");
     showTimer();
     showQuestion();
-    saveHighScore();
 }
 
 

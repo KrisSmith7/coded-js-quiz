@@ -18,7 +18,7 @@ body {
     top: 50%;
 }
 
-.title {
+.title, .score-title {
     color: var(--black-color);
     font-size: 30px;
     font-variant: small-caps;
@@ -77,20 +77,39 @@ body {
     font-weight: bold
 }
 
+#score-field {
+min-height: 25vw;
+background-color: var(--lilac);
+}
+
+
+.score-title {
+    text-decoration-color: var(--grey-color);
+    color: var(--blush);
+    display: flex;
+    justify-content: center;
+}
+
+.player-container{
+    display: flex;
+   justify-content: center;
+   min-height: 50vh;
+   border: 3px solid var(--blush);
+}
+
+.player-score {
+    color: var(--grey-color);
+    font-variant: small-caps;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 5px;
+    margin: 5px;
+    min-height: 50px;
+    width: 80%;
+    text-align: center;
+}
+
+
 .hide {
     display: none;
 }
-
-.correct {
-    background-color: green;
-}
-
-.incorrect {
-    background-color: red;
-}
-/*
-
-#score-field
-
-.player-score
-.player-container */
