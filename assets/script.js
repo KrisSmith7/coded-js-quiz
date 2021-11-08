@@ -34,13 +34,6 @@ function saveHighScore (event) {
     showHighScores ();
 };
 
-// var scoreButton = document.createElement("button")
-// scoreButton.className = "btn"
-// scoreButton.setAttribute('id','saveButton');
-// scoreButton.textContent = "Save Score"
-
-
-
 function showHighScores () {
     scoreField.classList.remove("hide");
     var playerDisplay = document.createElement("div");
@@ -73,7 +66,7 @@ function showHighScores () {
         };
     }
     
-    var counter = 10;
+    var counter = 60;
     
     console.log(getScores);
     const showTimer = function () {
@@ -223,7 +216,6 @@ var nextQuestion = function () {
     showQuestion();
 };
 
-// if (questionCounter > questions.answers.length) {endgame();};
 
 var startGame = function () {
     startButtonEl.classList.add("hide");

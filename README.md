@@ -1,17 +1,10 @@
 # coded-js-quiz
 
-# 04 Web APIs: Code Quiz
+This is a project incorporating javascript in order to create a timed quiz. Players will answer the multiple choice questions - if correct, points will be added to their score; if incorrect, time will be deducted from the countdown. When the timer expires, players will be able to save their scores in local storage so that they may see them at a later time. 
 
-As you proceed in your career as a web developer, you will probably be asked to complete a coding assessment, which is typically a combination of multiple-choice questions and interactive challenges. For this challenge, you will build a timed code quiz that's made up of multiple-choice questions. This app will run in the browser and feature dynamically updated HTML and CSS powered by your JavaScript code. It will also feature a clean and polished user interface and be responsive, ensuring that it adapts to multiple screen sizes.
+Acceptance Criteria is below.
 
-## User Story
-
-```
-AS A coding boot camp student
-I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
-SO THAT I can gauge my progress compared to my peers
-```
-
+---
 ## Acceptance Criteria
 
 ```
@@ -28,17 +21,12 @@ WHEN the game is over
 THEN I can save my initials and score
 ```
 
-The following animation demonstrates the application functionality:
+The following is a screenshot of the application as well as a link to the deployed application:
 
-![Demonstration of the Coding Quiz Challenge.](./Assets/04-web-apis-homework-demo.gif)
+![Screenshot of the Coding Quiz Challenge.](./assets/screenshot.png)
 
-### Review
+### Deployed Application
 
-You are required to submit the following for review:
-
-* The URL of the functional, deployed application.
-
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project. Includes screenshot, link, and description
 
 ---
-© 2021 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+Kris Smith

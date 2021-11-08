@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,30 +8,37 @@
     <title>JavaScript Timed Quiz</title>
     <link rel="stylesheet" href="./assets/style.css" />
 </head>
+
 <body>
     <div class="container">
-    <div class="quiz-title">
-        <h1 class=title>Coding Quiz Challenge</h1>
-        <p id="quiz-instr">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem veniam dolorum consequatur possimus in nobis adipisci labore, sed dolor culpa ipsa, quis minus saepe reprehenderit et error laboriosam ipsam ullam?</p>
-        <button id="start-btn" class="btn">Start Quiz</button>
-    </div>
-    
-        <div id="question-container" class="hide">
-            <div id ="question-text"> Get ready for questions!</div>
+        <div class="quiz-title">
+            <h1 class=title>Coding Quiz Challenge</h1>
+            <p id="quiz-instr">The following is a ten-question, multiple choice quiz to examine your knowledge of
+                Javascript basics. Please select the best answer for each question. You will have a one minute timer for
+                the quiz. Correct answers will earn ten points, incorrect answers will subtract ten seconds from your
+                time remaining. Good luck!</p>
+            <button id="start-btn" class="btn">Start Quiz</button>
         </div>
-        
-        <div id="answer-buttons"><!---insert answer choices here--></div>
 
-        <div id="countdown" class = "hide">Time Left:</div>
+        <div id="question-container" class="hide">
+            <div id="question-text"> Get ready for questions!</div>
+        </div>
+
+        <div id="answer-buttons">
+            <!---insert answer choices here-->
+        </div>
+
+        <div id="countdown" class="hide">Time Left:</div>
     </div>
-    
-    
-    
+
+
+
     <div id="score-field" class="hide">
-        <ul class="score-display"></ul>    
+        <ul class="score-display"></ul>
     </div>
     <button id="saveButton" class="hide">Save Score</button>
-    
-    <script src = "./assets/script.js"></script>
+
+    <script src="./assets/script.js"></script>
 </body>
+
 </html>
