@@ -1,3 +1,4 @@
+console.log(this);
 const startButtonEl = document.getElementById("start-btn");
 
 const questionSpace = document.getElementById("question-container");
@@ -36,33 +37,29 @@ function saveHighScore (event) {
 
 function showHighScores () {
     scoreField.classList.remove("hide");
+    var list = document.getElementById("score-list");
+    scoreField.innerHTML = "<h2 class='score-title'>High Scores</h2>"
     var playerDisplay = document.createElement("div");
     playerDisplay.className = "player-container";
-    
-    var scoreHeader = document.createElement("h2")
-    scoreHeader.className = "score-title"
-    scoreHeader.textContent = "High Scores"
-    scoreField.appendChild (scoreHeader);
-    
+        
     for(i=0; i < getScores.length;i++) {
-        var playerListEl = document.createElement("li");
+        const playerListEl = document.createElement("li");
         playerListEl.className = "player-score";
         playerListEl.textContent = highscore[i].pName + " -- " + highscore[i].pScore;
         playerDisplay.appendChild(playerListEl);
-        
-        
-        scoreField.appendChild(playerDisplay);}
+        scoreField.appendChild(playerDisplay)
+        }
     };
     
     var saveButton = document.getElementById('saveButton');
     saveButton.addEventListener('click', saveHighScore);
-    saveButton.classList.remove("hide")
+
     
     var endgame = function () {
         if (counter === 0) {
             questionSpace.classList.add("hide");
             answerSet.classList.add("hide");
-            //    saveHighScore ();
+    
         };
     }
     
@@ -79,7 +76,10 @@ function showHighScores () {
         function countdown() {
             counter--;
             timerEl.innerText = "Time Left: " + counter;
-            if (counter <= 0) { timerEl.innerHTML = "<h3 class = 'end-message'>Game Over!</h3>"; clearTimer(); }
+            if (counter <= 0 || questionCounter > 9) { 
+                questionSpace.innerText ="";
+                answerSet.innerText = "";
+                timerEl.innerHTML = "<h3 class = 'end-message'>Game Over!</h3> <p>Click 'Save Score' button below to save your score or refresh your page to try again!</p>"; clearTimer(); }
         }
         var timer = setInterval(countdown, 1000);
     };
@@ -198,8 +198,7 @@ var showQuestion = function () {
             if (playerChoice === "true") {playerScore = playerScore + 10; nextQuestion() 
             // console.log(playerScore);
             //  WHEN I answer a question incorrectly, THEN time is subtracted from the clock
-            } else if (playerChoice === "false") {
-                questionText.innerText = "Incorrect!";
+            } else if (playerChoice === "false") {;
                 counter = counter - 10;
                 nextQuestion()
             }
