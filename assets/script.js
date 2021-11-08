@@ -12,8 +12,11 @@ const timerEl = document.getElementById("countdown");
 //WHEN the game is over, THEN I can save my initials and score
 var highscore = [];
 var playerScore = 0;
+var getScores = JSON.parse(window.localStorage.getItem("HighScores")) || [];
 
-function saveHighScore () {
+function saveHighScore (event) {
+    event.preventDefault;
+
     var pInfo = {
         pName: prompt("What's your name?"),
         pScore: playerScore,
@@ -21,64 +24,73 @@ function saveHighScore () {
     while (pInfo.pName === "" || pInfo.pName === null) {
         window.alert("Please provide a valid response! Please try again.");
         return saveHighScore();
+    };
+
+    console.log(pInfo);
+    highscore.push(pInfo);
+    
+    window.localStorage.setItem("HighScores", JSON.stringify(highscore));
+    
+    showHighScores ();
 };
 
-console.log(pInfo);
-highscore.push(pInfo);
-console.log(highscore);
-// function setScores() { JSON.stringify(window.localStorage.setItem(playerInfoName)) };
-window.localStorage.setItem("HighScores", JSON.stringify(highscore));
- showHighScores ();
-};
+// var scoreButton = document.createElement("button")
+// scoreButton.className = "btn"
+// scoreButton.setAttribute('id','saveButton');
+// scoreButton.textContent = "Save Score"
 
-var getScores = JSON.parse(window.localStorage.getItem("HighScores")) || [];
 
-var showHighScores = function () {
+
+function showHighScores () {
     scoreField.classList.remove("hide");
     var playerDisplay = document.createElement("div");
     playerDisplay.className = "player-container";
+    
     var scoreHeader = document.createElement("h2")
     scoreHeader.className = "score-title"
     scoreHeader.textContent = "High Scores"
     scoreField.appendChild (scoreHeader);
     
     for(i=0; i < getScores.length;i++) {
-    var playerListEl = document.createElement("li");
-    playerListEl.className = "player-score";
-    // playerListEl.innerHTML = "<h3 class = 'player-name'>" + pInfo.pName + "</h3>" + "<span class = 'p-score'>"  + playerScore + "</span>"
-    playerListEl.textContent = highscore[i].pName + " -- " + highscore[i].pScore;
-    // scoreField.appendChild(playerListEl);};
-
-    playerDisplay.appendChild(playerListEl);
-    scoreField.appendChild(playerDisplay);}
-};
-
-
-var endgame = function () {
-    if (counter === 0) {
-        questionSpace.classList.add("hide");
-        answerSet.classList.add("hide");
-       saveHighScore ();
+        var playerListEl = document.createElement("li");
+        playerListEl.className = "player-score";
+        playerListEl.textContent = highscore[i].pName + " -- " + highscore[i].pScore;
+        playerDisplay.appendChild(playerListEl);
+        
+        
+        scoreField.appendChild(playerDisplay);}
     };
-}
-
-var counter = 10;
-
-const showTimer = function () {
-    // WHEN all questions are answered or the timer reaches 0, THEN the game is over
-    function clearTimer() {
-        clearInterval(timer);
-        endgame();
-        saveHighScore();
+    
+    var saveButton = document.getElementById('saveButton');
+    saveButton.addEventListener('click', saveHighScore);
+    saveButton.classList.remove("hide")
+    
+    var endgame = function () {
+        if (counter === 0) {
+            questionSpace.classList.add("hide");
+            answerSet.classList.add("hide");
+            //    saveHighScore ();
+        };
     }
-    function countdown() {
-        counter--;
-        timerEl.innerText = "Time Left: " + counter;
-        if (counter <= 0) { timerEl.innerHTML = "<h3>'Game Over'</h3>"; clearTimer(); }
-    }
-    var timer = setInterval(countdown, 1000);
-};
-
+    
+    var counter = 10;
+    
+    console.log(getScores);
+    const showTimer = function () {
+        // WHEN all questions are answered or the timer reaches 0, THEN the game is over
+        function clearTimer() {
+            clearInterval(timer);
+            endgame();
+            showHighScores ();
+        }
+        function countdown() {
+            counter--;
+            timerEl.innerText = "Time Left: " + counter;
+            if (counter <= 0) { timerEl.innerHTML = "<h3 class = 'end-message'>Game Over!</h3>"; clearTimer(); }
+        }
+        var timer = setInterval(countdown, 1000);
+    };
+    
 
 const questions = [
     {
