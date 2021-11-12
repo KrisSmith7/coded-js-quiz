@@ -12,7 +12,12 @@ const timerEl = document.getElementById("countdown");
 //WHEN the game is over, THEN I can save my initials and score
 var highscore = [];
 var playerScore = 0;
-var getScores = JSON.parse(window.localStorage.getItem("HighScores")) || [];
+var getScores = JSON.parse(window.localStorage.getItem("HighScores")) || [];  // -> key: "HighScores" : "["{ "initals": "string" }"]"
+console.log(getScores);  // --> JS Object    getScores:[{ initals: "string"}]
+console.log(typeof getScores);
+
+// IF "HighScores" does NOT exist in LocalStorage we have to create it first.
+//  localStorage.setItem("Highscores", "[]");
 
 function saveHighScore(event) {
     event.preventDefault;
@@ -27,30 +32,38 @@ function saveHighScore(event) {
     };
 
     console.log(pInfo);
-    highscore.push(pInfo);
-
-    window.localStorage.setItem("HighScores", JSON.stringify(highscore));
+    // Let's Grab our DATA first 
+    let currentScores = JSON.parse(localStorage.getItem("HighScores"));
+    // Update the DATA (as a JS object)
+    currentScores.push(pInfo);
+    // Update the local storage(DOM DATA -> String)
+    window.localStorage.setItem("HighScores", JSON.stringify(currentScores));
 
     showHighScores();
 };
 
 function showHighScores() {
+    // Verify we have the data
+    let current = JSON.parse(localStorage.getItem("HighScores"));
+    console.log(current);
+    console.log(typeof current);
+
     scoreField.classList.remove("hide");
     var list = document.getElementById("score-list");
     scoreField.innerHTML = "<h2 class='score-title'>High Scores</h2>"
     var playerDisplay = document.createElement("div");
     playerDisplay.className = "player-container";
 
-    for (i = 0; i < getScores.length; i++) {
+    for (i = 0; i < current.length; i++) {
         const playerListEl = document.createElement("li");
         playerListEl.className = "player-score";
-        playerListEl.textContent = highscore[i].pName + " -- " + highscore[i].pScore;
+        playerListEl.textContent = current[i].pName + " -- " + current[i].pScore;
         playerDisplay.appendChild(playerListEl);
         scoreField.appendChild(playerDisplay)
-        return getScores;
+       //return getScores;
     }
 };
-console.log(getScores);
+// console.log(getScores);
 
 var saveButton = document.getElementById('saveButton');
 saveButton.addEventListener('click', saveHighScore);
@@ -225,7 +238,7 @@ var startGame = function () {
     instructions.classList.add("hide");
     showTimer();
     showQuestion();
-    getScores();
+    // getScores();
 }
 
 
